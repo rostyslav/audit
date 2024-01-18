@@ -1,2 +1,2 @@
-# audit
+# Auditor
 Standalone audit package

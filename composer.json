@@ -1,0 +1,27 @@
+{
+  "name": "rostyslav/auditor",
+  "description": "Standalone audit package",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rostyslav Rava",
+      "email": "rostyslav@ravasoft.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.1"
+  },
+  "suggest": {
+    "ext-mysqli": "*"
+  },
+  "autoload": {
+    "psr-4": {"Auditor\\": "src/Auditor"}
+  },
+  "autoload-dev": {
+    "psr-4": {"Auditor\\": "tests/Auditor"}
+  }
+}
