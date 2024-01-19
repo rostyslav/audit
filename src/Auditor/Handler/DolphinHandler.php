@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Auditor\Handler;
 
+use Exception;
+
+use mysqli;
+
 use Auditor\AuditRecord;
 
 class DolphinHandler implements Handleable
@@ -17,6 +21,12 @@ class DolphinHandler implements Handleable
         // Open database connection.
         $this->conn = new mysqli($hostname, $username, $password, $database, $port);
         // Check schema version.
+        $result = $this->conn->query('SHOW TABLES');
+        if ($result->num_rows === 0) {
+            if($this->migrate() === false) {
+                throw new Exception("Auditor migration failed.");
+            }
+        }
         // Apply needed upgrades to match package version.
     }
 
@@ -39,5 +49,13 @@ class DolphinHandler implements Handleable
         // TODO:
         // Close database connection.
         return $this->conn->close();
+    }
+
+    private function migrate(int $version = 0): bool {
+        $result = true;
+        if ($version === 0) {
+            // TODO: Apply migrations.
+        }
+        return $result;
     }
 }
