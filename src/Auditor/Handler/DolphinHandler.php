@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
+namespace Auditor\Handler;
+
 use Auditor\AuditRecord;
-use Auditor\Handler\Handleable;
 
 class DolphinHandler implements Handleable
 {
