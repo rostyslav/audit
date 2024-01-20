@@ -9,12 +9,14 @@ use DateTime;
 class AuditRecord
 {
 
+    private int $id;
+
     private AuditUser $auditUser;
 
     private AuditEvent $auditEvent;
 
-    private DateTime $createdAt;
-
     private string $ipAddress;
+
+    private DateTime $createdAt;
 
 }

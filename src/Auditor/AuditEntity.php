@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Auditor;
 
-class AuditUser
+class AuditEntity
 {
 
     private int $id;
