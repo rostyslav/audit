@@ -5,14 +5,16 @@ namespace Auditor;
 enum EnvironmentEnum
 {
 
-    case MYSQL_HOST;
+    case SCHEME;
 
-    case MYSQL_USER;
+    case USER;
 
-    case MYSQL_PASSWORD;
+    case PASSWORD;
 
-    case MYSQL_DATABASE;
+    case HOST;
 
-    case MYSQL_PORT;
+    case PORT;
+
+    case DATABASE;
 
 }

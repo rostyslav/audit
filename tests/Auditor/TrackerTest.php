@@ -20,16 +20,16 @@ class TrackerTest extends TestCase
 
     public function testWithDolphinHandler(): void
     {
-        $environmentFile = Environment::ENVIRONMENT_FILE;
-        $this->assertTrue(file_exists($environmentFile), 'Environment file does not exists.');
-        $environment = parse_ini_file($environmentFile);
-        $this->assertIsArray($environment);
+        $this->assertTrue(file_exists(Environment::ENVIRONMENT_FILE), 'Environment file does not exists.');
+        $environmentConfiguration = parse_ini_file(Environment::ENVIRONMENT_FILE);
+        $this->assertIsArray($environmentConfiguration);
+        $environment = Environment::parseDatabaseUrl($environmentConfiguration[Environment::ENV_AUDITOR_DATABASE_URL]);
         $dolphinHandler = new DolphinHandler(
-            $environment[EnvironmentEnum::MYSQL_HOST->name],
-            $environment[EnvironmentEnum::MYSQL_USER->name],
-            $environment[EnvironmentEnum::MYSQL_PASSWORD->name],
-            $environment[EnvironmentEnum::MYSQL_DATABASE->name],
-            intval($environment[EnvironmentEnum::MYSQL_PORT->name])
+            $environment[EnvironmentEnum::HOST->name],
+            $environment[EnvironmentEnum::USER->name],
+            $environment[EnvironmentEnum::PASSWORD->name],
+            $environment[EnvironmentEnum::DATABASE->name],
+            intval($environment[EnvironmentEnum::PORT->name])
         );
         $tracker = new Tracker($dolphinHandler);
         $this->assertInstanceOf(DolphinHandler::class, $tracker->getHandler());
