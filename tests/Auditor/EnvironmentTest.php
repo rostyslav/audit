@@ -9,9 +9,19 @@ use PHPUnit\Framework\TestCase;
 class EnvironmentTest extends TestCase
 {
 
-    const TEST_AUDITOR_DATABASE_URL = "mysql://auditor:qjgthybqntfnh@db.farfaraway.galaxy:3307/auditor?charset=utf8mb4";
-
-    const TEST_SCHEMA = 'mysql';
+    const TEST_AUDITOR_DATABASE_URL = Environment::SCHEME_MYSQL
+        . Environment::COLON
+        . Environment::SLASHES
+        . self::TEST_USER
+        . Environment::COLON
+        . self::TEST_PASSWORD
+        . Environment::AT
+        . self::TEST_HOST
+        . Environment::COLON
+        . self::TEST_PORT
+        . Environment::SLASH
+        . self::TEST_DATABASE
+        . "?charset=utf8mb4";
 
     const TEST_USER = 'auditor';
 
@@ -28,7 +38,7 @@ class EnvironmentTest extends TestCase
     public function testParse(): void
     {
         $environment = Environment::parseDatabaseUrl(self::TEST_AUDITOR_DATABASE_URL);
-        $this->assertEquals(self::TEST_SCHEMA, $environment[EnvironmentEnum::SCHEME->name]);
+        $this->assertEquals(Environment::SCHEME_MYSQL, $environment[EnvironmentEnum::SCHEME->name]);
         $this->assertEquals(self::TEST_USER, $environment[EnvironmentEnum::USER->name]);
         $this->assertEquals(self::TEST_PASSWORD, $environment[EnvironmentEnum::PASSWORD->name]);
         $this->assertEquals(self::TEST_HOST, $environment[EnvironmentEnum::HOST->name]);
