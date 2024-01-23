@@ -2,19 +2,19 @@
 
 namespace Auditor;
 
-enum EnvironmentEnum
+enum EnvironmentEnum: int
 {
 
-    case SCHEME;
+    case SCHEME = 0;
 
-    case USER;
+    case USER = 1;
 
-    case PASSWORD;
+    case PASSWORD = 2;
 
-    case HOST;
+    case HOST = 3;
 
-    case PORT;
+    case PORT = 4;
 
-    case DATABASE;
+    case DATABASE = 5;
 
 }
