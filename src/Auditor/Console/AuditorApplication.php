@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Auditor\Console;
 
 use Auditor\Console\Command\InitCommand;
+use Auditor\Console\Command\UpdateCommand;
 
 class AuditorApplication
 {
 
     private array $commands = [
-        InitCommand::class
+        InitCommand::class,
+        UpdateCommand::class
     ];
 
     public function launch(): int
