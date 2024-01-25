@@ -4,36 +4,49 @@ declare(strict_types=1);
 
 namespace Auditor\Console;
 
-use Auditor\Console\Command\InitCommand;
-use Auditor\Console\Command\UpdateCommand;
+use Auditor\Console\Command\AuditorCommand;
+use Auditor\Console\Command\HelpCommand;
 
 class AuditorApplication
 {
 
-    private array $commands = [
-        InitCommand::class,
-        UpdateCommand::class
-    ];
+    private array $arguments;
 
-    public function launch(): int
+    private static AuditorApplication $application;
+
+    public static function getInstance(): AuditorApplication
+    {
+        if(!isset(self::$application)) {
+            self::$application = new AuditorApplication();
+        }
+        return self::$application;
+    }
+
+    public function setArguments(array $arguments): void
+    {
+        $this->arguments = $arguments;
+    }
+
+    public function run(): int
     {
         printf("Auditor\n\n"); //TODO: Show auditor version
 
-        printf("Available commands:\n");
-        foreach ($this->getAvailableCommands() as $name => $description) {
-            printf("  %-10s %s\n", $name, $description);
-        }
-        return 0;
-    }
+        $currentCommand = HelpCommand::class;
 
-    private function getAvailableCommands(): array
-    {
-        $availableCommands = [];
-        foreach ($this->commands as $command) {
-            $commandObject = new $command();
-            $availableCommands[$commandObject->getName()] = $commandObject->getDescription();
+        if(isset($this->arguments[1])) {
+            $commandName = $this->arguments[1];
+            foreach (AuditorCommand::$commands as $command) {
+                if ($command::$name === $commandName) {
+                    $currentCommand = $command;
+                    break;
+                }
+            }
         }
-        return $availableCommands;
+
+        $commandObject = new $currentCommand();
+        $commandObject->run();
+
+        return 0;
     }
 
 }

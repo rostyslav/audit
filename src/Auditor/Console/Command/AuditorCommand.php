@@ -5,20 +5,16 @@ namespace Auditor\Console\Command;
 abstract class AuditorCommand
 {
 
-    protected string $name;
+    public static array $commands = [
+        HelpCommand::class,
+        InitCommand::class,
+        UpdateCommand::class
+    ];
 
-    protected string $description;
+    public static string $name;
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    public static string $description;
 
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public abstract function execute();
+    public abstract function run(): int;
 
 }

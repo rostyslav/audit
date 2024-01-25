@@ -5,13 +5,13 @@ namespace Auditor\Console\Command;
 class UpdateCommand extends AuditorCommand
 {
 
-    protected string $name = 'update';
+    public static string $name = 'update';
 
-    protected string $description = 'Update handler for use with new Auditor version';
+    public static string $description = 'Update handler for use with new Auditor version';
 
-    public function execute()
+    public function run(): int
     {
-
+        return 0;
     }
 
 }

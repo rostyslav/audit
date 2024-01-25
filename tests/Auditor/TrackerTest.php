@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Auditor;
 
 use Auditor\Handler\BlackHoleHandler;
-use Auditor\Handler\DolphinHandler;
+use Auditor\Handler\MySQLHandler;
 use PHPUnit\Framework\TestCase;
 
 class TrackerTest extends TestCase
@@ -24,7 +24,7 @@ class TrackerTest extends TestCase
         $environmentConfiguration = parse_ini_file(Environment::ENVIRONMENT_FILE);
         $this->assertIsArray($environmentConfiguration);
         $environment = Environment::parseDatabaseUrl($environmentConfiguration[Environment::ENV_AUDITOR_DATABASE_URL]);
-        $dolphinHandler = new DolphinHandler(
+        $dolphinHandler = new MySQLHandler(
             $environment[EnvironmentEnum::HOST->name],
             $environment[EnvironmentEnum::USER->name],
             $environment[EnvironmentEnum::PASSWORD->name],
@@ -32,7 +32,7 @@ class TrackerTest extends TestCase
             intval($environment[EnvironmentEnum::PORT->name])
         );
         $tracker = new Tracker($dolphinHandler);
-        $this->assertInstanceOf(DolphinHandler::class, $tracker->getHandler());
+        $this->assertInstanceOf(MySQLHandler::class, $tracker->getHandler());
     }
 
 }

@@ -2,16 +2,19 @@
 
 namespace Auditor\Console\Command;
 
+use Auditor\Environment;
+
 class InitCommand extends AuditorCommand
 {
 
-    protected string $name = 'init';
+    public static string $name = 'init';
 
-    protected string $description = 'Initialise handler for use with Auditor';
+    public static string $description = 'Initialise handler for use with Auditor';
 
-    public function execute()
+    public function run(): int
     {
 
+        return 0;
     }
 
 }

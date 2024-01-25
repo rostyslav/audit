@@ -10,7 +10,7 @@ use mysqli;
 
 use Auditor\AuditRecord;
 
-class DolphinHandler implements Handleable
+class MySQLHandler implements Handleable
 {
 
     private mysqli $conn;

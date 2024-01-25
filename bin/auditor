@@ -3,5 +3,6 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$application = new Auditor\Console\AuditorApplication();
-$application->launch();
+$application = Auditor\Console\AuditorApplication::getInstance();
+$application->setArguments($argv);
+$application->run();
